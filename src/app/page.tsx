@@ -1,40 +1,31 @@
 "use client";
-// import Image from "next/image";
-import { useEffect, useState } from "react";
-import Header from "./_components/Header";
-import CartProvider from "./_context/CartContext";
+import Header from '@/_components/header/Header';
+import Product from '@/_components/product/Product';
+import { usePathname } from 'next/navigation';
+import { FaCartPlus } from 'react-icons/fa';
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
-  const [filters, setFilters] = useState([]);
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setProducts(data.products)
-      })
-      .catch(error => console.error("Error fetching data: ", error))
-  }, [])
-
-  // const categories = ["all"];
-  // products.forEach(product => {
-  //   if (!categories.includes(product.category)) {
-  //     categories.push(product.category)
-  //   };
-  // });
+export default function page() {
+  // const { pathname } = useLocation();
+  const pathname = usePathname();
+  console.log(pathname);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-10">
-        <CartProvider>
-          <Header searchInput={searchInput}
-            setSearchInput={setSearchInput} filters={filters}
-            setFilters={setFilters} />
-        </CartProvider>
+    <main className="py-10">
+      <h2 className="text-3xl font-semibold mb-8 text-center text-indigo-400">
+        Featured Products
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
       </div>
-    </div>
-  );
+    </main>
+  )
 }
